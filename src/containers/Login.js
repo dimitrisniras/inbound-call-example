@@ -20,22 +20,20 @@ function Login({ nexmoApp, setNexmoApp, setIncomingCall }) {
     setUserToken(event.target.value);
   };
 
-  function setupCallListeners(app) {
-    app.on("member:call", (member, call) => {
-      console.log("Incoming Call");
-      console.log(call);
-      setIncomingCall(call);
+  const setupConversationListeners = (app, call) => {
+    const conversation = call.conversation;
+    conversation.on("member:left", conversation.id, (from, event) => {
+      if (from.userId === app.me.id) {
+        setIncomingCall(undefined);
+        conversation.releaseGroup(conversation.id);
+      }
+    });
+  };
 
-      call.conversation.on(
-        "member:left",
-        call.conversation.id,
-        (from, event) => {
-          if (from.userId === app.me.id) {
-            console.log("Call hangup");
-            setIncomingCall(undefined);
-          }
-        }
-      );
+  const setupApplicationListeners = (app) => {
+    app.on("member:call", (member, call) => {
+      setIncomingCall(call);
+      setupConversationListeners(app, call);
     });
   }
 
@@ -43,9 +41,9 @@ function Login({ nexmoApp, setNexmoApp, setIncomingCall }) {
     setProgress(true);
     nexmoApp.login(userToken).then((app) => {
       setProgress(false);
-      setupCallListeners(app);
       window.nexmoApp = app;
       setNexmoApp(app);
+      setupApplicationListeners(app);
     });
   }
 

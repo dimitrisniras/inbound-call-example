@@ -1,12 +1,10 @@
 # inbound-call-example
 
-This React application allows you to receive inbound calls using the Vonage API JS SDK. During the initial login, you pass a user token and the user is waiting for the inbound call. When you are calling the predefined LVN `Answer Call` and `Reject Call` buttons will appear to the right top corner. If you click answer, then the call will be estabilished and you will see a `Hangup Call` button in order to terminate the call, otherwise if you click on the reject, the call will be rejected.
-
-You can see all the events that are coming throughout the call procedure.
+This React application allows you to receive inbound calls using the Vonage Client SDK. During the initial login, you pass a user token and the user is waiting for the inbound call. When you call the predefined LVN `Answer Call` and `Reject Call` buttons will appear to the right top corner. If you click answer then the call will be estabilished and you will see a `Hangup Call` button in case you want to terminate the call, otherwise if you click on the reject, the call will be rejected and no media will be exchanged. You can also see all the socket events that are coming through.
 
 ## Capabilities
 
-Adds Voice capability to your nexmo application and configures the `Answer URL` and `Event URL` webhooks with a connect action on a single predefined user (`voiceAnswer` and `voiceEvent` in `index.js`).
+Adds Voice capability to your nexmo application and configures the Voice `Answer URL` and `Event URL` webhooks with a connect action on a single hardcoded user (`voiceAnswer` and `voiceEvent` in `index.js`).
 
 ## To run the server
 

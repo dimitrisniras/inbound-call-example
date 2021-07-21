@@ -49,8 +49,6 @@ const useStyles = makeStyles((theme) => ({
     top: 5,
     width: "30%",
     "text-align": "center",
-    "border-style": "solid",
-    "border-color": "grey",
     "border-width": "medium",
   },
   answerButton: {
@@ -130,7 +128,8 @@ const EventList = ({ nexmoApp, events, setEvents, incomingCall }) => {
             >
               <Typography className={classes.heading}>{event.type}</Typography>
               <Typography className={classes.secondaryHeading}>
-                From: {event.from}
+                From:{" "}
+                {event?._embedded?.from_member?.id}
               </Typography>
               <Divider orientation="vertical" flexItem />
               <Typography className={classes.secondaryHeading}>
